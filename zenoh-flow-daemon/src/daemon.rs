@@ -153,8 +153,7 @@ impl Daemon {
 
         log::trace!("Running...");
 
-        let _ = stop
-            .recv()
+        stop.recv()
             .await
             .map_err(|e| ZFError::RecvError(format!("{}", e)))?;
 
@@ -376,7 +375,7 @@ impl TryFrom<DaemonConfig> for Daemon {
             pid_file: config.pid_file,
             path: config.path,
             name,
-            uuid: uuid.clone(),
+            uuid,
             zenoh: zconfig.clone(),
             loader: extensions.clone(),
         };
