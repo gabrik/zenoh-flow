@@ -17,10 +17,10 @@ pub mod dataflow;
 pub mod link;
 pub mod node;
 
+use crate::error::ZFError;
 use crate::model::link::PortDescriptor;
 use crate::serde::{Deserialize, Serialize};
-use crate::ZFError;
-use crate::{DurationDescriptor, NodeId, PortId};
+use crate::types::{DurationDescriptor, NodeId, PortId};
 use std::fmt;
 
 /// Describes one output
@@ -32,7 +32,7 @@ use std::fmt;
 /// output : Counter
 /// ```
 ///
-#[derive(Debug, Clone, Serialize, Deserialize, PartialEq)]
+#[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct OutputDescriptor {
     pub node: NodeId,
     pub output: PortId,
@@ -52,7 +52,7 @@ impl fmt::Display for OutputDescriptor {
 /// node : SumOperator
 /// input : Number
 /// ```
-#[derive(Debug, Serialize, Deserialize, Clone, PartialEq)]
+#[derive(Debug, Serialize, Deserialize, Clone, PartialEq, Eq)]
 pub struct InputDescriptor {
     pub node: NodeId,
     pub input: PortId,

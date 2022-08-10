@@ -14,10 +14,10 @@
 
 use super::link::PortRecord;
 use crate::serde::{Deserialize, Serialize};
-use crate::{NodeId, RuntimeId};
+use crate::types::{NodeId, RuntimeId};
 
 /// The type of the connector.
-#[derive(PartialEq, Serialize, Deserialize, Debug, Clone)]
+#[derive(PartialEq, Eq, Serialize, Deserialize, Debug, Clone)]
 pub enum ZFConnectorKind {
     Sender,
     Receiver,

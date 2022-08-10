@@ -23,11 +23,12 @@ extern crate serde_cbor;
 #[cfg(feature = "data_json")]
 extern crate serde_json;
 
+use crate::error::ZFError;
 use crate::model::dataflow::record::DataFlowRecord;
 use crate::model::RegistryNode;
 use crate::runtime::{RuntimeConfig, RuntimeInfo, RuntimeStatus};
 use crate::serde::{de::DeserializeOwned, Serialize};
-use crate::{async_std::sync::Arc, ZFError, ZFResult};
+use crate::{async_std::sync::Arc, types::ZFResult};
 use async_std::pin::Pin;
 use async_std::stream::Stream;
 use async_std::task::{Context, Poll};
@@ -296,7 +297,7 @@ impl Stream for ZFRuntimeConfigStream {
                 SampleKind::Put | SampleKind::Patch => match sample.value.encoding {
                     Encoding::APP_OCTET_STREAM => {
                         match deserialize_data::<crate::runtime::RuntimeConfig>(
-                            &sample.value.payload.contiguous().to_vec(),
+                            &sample.value.payload.contiguous(),
                         ) {
                             Ok(info) => Poll::Ready(Some(info)),
                             Err(_) => Poll::Pending,
@@ -693,8 +694,7 @@ impl DataStore {
                 let kv = &data[0];
                 match &kv.sample.value.encoding {
                     &Encoding::APP_OCTET_STREAM => {
-                        let ni =
-                            deserialize_data::<T>(&kv.sample.value.payload.contiguous().to_vec())?;
+                        let ni = deserialize_data::<T>(&kv.sample.value.payload.contiguous())?;
                         Ok(ni)
                     }
                     _ => Err(ZFError::DeseralizationError),
@@ -722,7 +722,7 @@ impl DataStore {
         for kv in data.into_iter() {
             match &kv.sample.value.encoding {
                 &Encoding::APP_OCTET_STREAM => {
-                    let ni = deserialize_data::<T>(&kv.sample.value.payload.contiguous().to_vec())?;
+                    let ni = deserialize_data::<T>(&kv.sample.value.payload.contiguous())?;
                     zf_data.push(ni);
                 }
                 _ => return Err(ZFError::DeseralizationError),
