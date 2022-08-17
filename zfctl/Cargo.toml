@@ -50,7 +50,7 @@ uuid = { version = "0.8.1", features = ["serde", "v4"] }
 zenoh = { git = "https://github.com/eclipse-zenoh/zenoh.git", branch = "master" }
 zenoh-flow = {path = "../zenoh-flow"}
 zenoh-util = { git = "https://github.com/eclipse-zenoh/zenoh.git", branch = "master" }
-znrpc-macros = { git = "https://github.com/atolab/zenoh-rpc.git", branch = "master" }
+zrpc-macros = { git = "https://github.com/atolab/zenoh-rpc.git", branch = "master" }
 zrpc = { git = "https://github.com/atolab/zenoh-rpc.git", branch = "master" }
 
 # Debian package configuration

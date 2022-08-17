@@ -35,8 +35,8 @@ use crate::types::{FlowId, RuntimeId, ZFResult};
 use uhlc::HLC;
 use zenoh::config::Config as ZenohConfig;
 use zenoh::Session;
-use znrpc_macros::znservice;
 use zrpc::zrpcresult::{ZRPCError, ZRPCResult};
+use zrpc_macros::znservice;
 
 pub mod dataflow;
 pub mod message;
