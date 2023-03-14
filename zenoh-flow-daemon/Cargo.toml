@@ -38,10 +38,10 @@ log = "0.4"
 async-std = { version = "=1.12.0", features = ["attributes"] }
 uuid = { version = "1.1", features = ["serde", "v4"] }
 uhlc = "0.5.1"
-zenoh = { version = "=0.7.0-rc" }
-zenoh-util = { version = "=0.7.0-rc" }
-zrpc = { version= "=0.6.0-alpha1" }
-zrpc-macros = { version= "=0.6.0-alpha1" }
+zenoh = { git = "https://github.com/eclipse-zenoh/zenoh" }
+zenoh-util = { git = "https://github.com/eclipse-zenoh/zenoh" }
+zrpc = { git = "https://github.com/gabrik/zenoh-rpc" }
+zrpc-macros = { git = "https://github.com/gabrik/zenoh-rpc" }
 clap = { version = "4.0", features = ["derive"] }
 hostname = "0.3.1"
 machine-uid = "0.2.0"
